@@ -1,0 +1,34 @@
+%run my/hello.py
+%load my/hello.py 读入代码
+%timeit 测量一行代码运行时间
+%%timeit  测量代码块
+%time   %%time
+%%html
+%%js
+!dir
+%%writefile test.py 写入文件
+
+np.__version__
+array.array('i', list(range(10))
+np.array(range(10),dtype='float')
+np.arange(1000)   range()
+
+np.arange(start,stop,step)
+np.linspace(start,stop,num,endpoint=False)
+np.zeros(shape=(3,10),dtype=int)
+np.ones((22,33),dtype=int)
+np.full(shape=(2,4),full_value=88)
+np.random.random((3,5))
+np.random.normal(size=6)  正态分布
+
+a.ndim    a.shape   a.size
+a.reshape((5,-1))
+
+a[1:5:2,2::4].copy()  跟原来没关系
+
+np.concatenate([a,b],axis=1)   矩阵左上角开始向下是x轴axis=0，向右是y轴,axis=1
+np.vstack([a,b])    v=vertical
+np.hstack([a,b])    h=horizontal
+np.vsplit(y,[1,3])    列表是分割点  上下分是竖着分割
+np.hsplit(y,[1,3])     左右分是横着分割
+   

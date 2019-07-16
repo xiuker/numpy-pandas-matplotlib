@@ -1,0 +1,65 @@
+pd.Series(data,index=[])
+ser.to_dict()
+ser.tolist()
+ser.to_json()
+ser.to_frame()
+
+pd.DataFrame(data,index=[],columns=[])
+
+df['name']    df.name   df.age   series对象
+df[['name','age']]    dataframe对象 这样的对象修改会影响原来的数据，可以使用  df.name.copy()
+df.columns  取
+df[df.columns[1:3]] 
+df['year'] = datetime.datetime.now().year - df.age
+df.drop('year', axis=1)
+df.drop(df.columns[1::2], axis=1)
+df.loc[1]   series对象
+df.loc[[1,3]]   dataframe对象
+df.loc[df.index[-2:]]
+df.loc[df.index[-2:], ['name', 'age']]
+df[1:3]
+df[-2:]  直接df[2]报错，因为没有‘2’这一列
+
+df.loc[df.shape[0]] = {'name':'','age':'','height':'','year':''}
+df.drop(2)   删除行不用指定axis
+df2.index = range(df2.shape[0])
+df2.iloc[2]
+df2.iat[1,1]  横纵都是隐藏的索引
+df[df['height'] >= 1.65]
+df[(df['height'] >= 1.65) & (df['age'] <=20)]
+df.query('height>=1.65 and age <=20')
+age=20
+df.query('age == @age')
+df[df['age'].isin([18,19])]
+df.T 
+
+pd.read_table('my/01.txt',sep=':',names=['','','',''])
+pd.read_csv('my/04.csv')
+pd.read_excel('')
+tables = pd.read_html('my/05.html',header=0)
+tables[0]  tables[1]
+tables = pd.read_html('my/05.html',header=0,attrs={'class':'mydata'})
+tables[0]
+conn = pymysql.connect(host='', user='',passwd='',port='',db='',charset='utf8')
+sql = 'select * from tablename'
+data = pd.read_sql(sql, conn)
+conn.close()
+
+ser.sort_index(ascending=False)
+ser.sort_values()   None值排序始终在最后
+df.sort_index()
+df.sort_index(axis=1)
+df.sort_values(by='c')   df.sort_values(by=['a','c'])
+
+df.rank()   得到的是排名情况，相当于索引
+df.rank(method='frist')  #默认 average ，还有min，max
+
+df.merge(df1,df2,on='stu_no',how='left')   how默认inner，还有right，left，outer    合并
+pd.concat([df1,df2],axis=1)  拼接
+
+df.head()    df.tail()
+df.info()   df.describe()  空值将被跳过
+df.count()   df.mean()  df.sum(axis=1) 
+df.a.sum()    df.cumsum()  累加求和得到datafram
+df.std()  df.var()  df.max()   df.min()
+df.quantile(0.75)  df.quantile(0.25)

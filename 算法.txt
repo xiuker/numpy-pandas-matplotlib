@@ -1,0 +1,19 @@
+plt.plot()
+plt.annotate('a',xy=X[0])  描点
+
+plt.scatter()
+
+from collections import Counter
+a=Counter(arg)
+a.most_common(int)   取前int个最多的
+
+np.savetxt('name.txt', data)
+np.random.permutation(150) 产生150个不重复的数据
+超参数，开始机器学习之前需要设置的参数
+模型参数：是通过训练
+
+np.loadtxt('lujing')
+
+np.mean()  np.std()标准差
+
+x ,y = np.meshgrid(np.arange(1,2,0.2), np.arange(2,3,0.2))
