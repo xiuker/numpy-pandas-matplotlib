@@ -1,0 +1,4 @@
+name	age	email
+jack	18	jack@example.com
+lily	22	lily@example.com
+tom	21	tom@example.com
