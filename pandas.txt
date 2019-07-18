@@ -63,3 +63,96 @@ df.count()   df.mean()  df.sum(axis=1)
 df.a.sum()    df.cumsum()  累加求和得到datafram
 df.std()  df.var()  df.max()   df.min()
 df.quantile(0.75)  df.quantile(0.25)
+
+grouped = df.groupby('类别')
+grouped[['数量','金额']].sum()
+grouped[['单价']].max()
+g = df.groupby(['类别','单价'])
+
+df.pivot_table(index=['类别','名称'],values=['数量','金额'],aggfunc=np.sum)  # 默认是np.mean 平均
+
+time模块
+time.time()  浮点数
+time.localtime()
+time.strftime('%Y-%m-%d %H:%M:%S',time.time())
+time.strptime('2018-02-25','%Y-%m-%d %H:%M:%S')
+
+datetime 模块
+now=datetime.now()
+now.year  now.month
+now.strftime('%Y-%m-%d %H:%M:%S')
+now.timestamp() 转化成浮点数
+datetime(2018,05,30)
+datetime.fromtimestamp(time.time())
+
+delta = datetime.now() - datetime(2018,5,28)
+delta.days   delta.seconds   delta.hours
+
+pd.date_range('2018-05-01','2018-05-11',freq=''D)   freq默认是D天，W周，M月，Q季度，A年，H小时，T分，S秒
+pd.date_range('2018-05-01',freq='Q',periods=10) 指定周期
+df[(df.time >= '2018-06-01 08:00:00') & (df.time <= '2018-06-10 08:00:00')]
+df2 = df.set_index('time')
+s = df.to_datetime(df.time)
+df.index = s
+时间序列切片好用
+df['2018-06-01 08:00:00':'2018-06-01 08:00:00']
+df['2018-06-01'] 直接取出这一天的数据
+df.groupby(df.index.date).mean()  通过日期分组
+df.groupby(df.index.week).mean()
+df.groupby(df.index.hour).mean()
+
+df2 = df.resample('90S').mean()  重新采样 90s间隔
+df2 = df.resample('5T').max()
+
+plt.rc('font', **{'family':'Microsoft YaHei, SimHei'})
+data['工资'].plot()
+plt.show()
+
+data['工资'].plot(kind='bar')
+plt.show()
+
+data[['工资']].boxplot()
+plt.show()
+
+data[['工资']].hist()
+plt.show()
+
+data.plot(kind='barh', stacked=True)
+plt.show()
+
+探索性分析 数据质量分析
+缺失值 
+df.innull().sum()  df.notnull().sum() 
+df['lang'] == '' 空值
+异常值 
+df.describe()  df[['salary']].boxplot()  箱线图找异常值
+重复值 df.duplicated().sum() 
+df.duplicated(subset=['lang']).sum() 
+一致性
+df.lang.unique()
+
+数据特征分析
+分布分析
+np.max
+
+对比分析
+周期性分析
+相关性分析
+df.corr()  接近1和-1表示有相关，接近0没关系
+install seaborn as sns
+sns.heatmap(df.corr(), cmap=sns.color_palette('Blues'))
+mask = np.zeros_like(df.corr(), dtype=np.bool)
+ind = np.triu_indices_from(mask)
+
+数据清理
+df.dropna(how='all')
+df.dropna(subset=['age'])
+df.fillna(0)   df.fillna({'age':18, 'score':'d'})
+df.fillna(method='ffill') 按前面的数据填充
+df.fillna(method='bfill')   按后面的数据填充
+df.fillna({'age':df.age.mean()})
+df.fillna({'age':df.age.median()})
+df.interpolate()  插值，默认线性插值
+df.fillna({'score':'missing'}, limit=1)  limit只插值一次
+df.drop_duplicates()
+df.drop_duplicates(['age','score'])
